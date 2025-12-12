@@ -1,0 +1,40 @@
+{
+  "name": "formfiller-dev-setup",
+  "version": "1.0.0",
+  "description": "Development-only monorepo setup for FormFiller packages",
+  "private": true,
+  "workspaces": [
+    "formfiller-types",
+    "formfiller-schema",
+    "formfiller-validator",
+    "formfiller-backend",
+    "formfiller-frontend"
+  ],
+  "scripts": {
+    "install:all": "npm install",
+    "postinstall": "rm -rf formfiller-backend/node_modules/formfiller-* formfiller-frontend/node_modules/formfiller-* 2>/dev/null || true",
+    "build:types": "npm run build -w formfiller-types",
+    "build:schema": "npm run build -w formfiller-schema",
+    "build:validator": "npm run build -w formfiller-validator",
+    "build:libs": "npm run build:types && npm run build:schema && npm run build:validator",
+    "build:backend": "npm run build -w formfiller-backend",
+    "build:frontend": "npm run build -w frontend",
+    "build:all": "npm run build:libs && npm run build:backend && npm run build:frontend",
+    "dev:backend": "npm run dev -w formfiller-backend",
+    "dev:frontend": "npm run dev -w frontend",
+    "test:types": "npm test -w formfiller-types --if-present",
+    "test:schema": "npm test -w formfiller-schema",
+    "test:validator": "npm test -w formfiller-validator",
+    "test:backend": "npm test -w formfiller-backend",
+    "test:frontend": "npm test -w frontend",
+    "test:libs": "npm run test:schema && npm run test:validator",
+    "lint:all": "npm run lint -w formfiller-types -w formfiller-schema -w formfiller-validator -w formfiller-backend -w frontend --if-present"
+  },
+  "keywords": [
+    "formfiller",
+    "monorepo",
+    "development"
+  ],
+  "author": "Vivi and Sam <lowcoders@protonmail.com>",
+  "license": "MIT"
+}

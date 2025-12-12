@@ -1,0 +1,17 @@
+{
+  "name": "formfiller-dev-setup-meta",
+  "version": "1.0.0",
+  "description": "Meta repository for FormFiller monorepo development setup",
+  "private": true,
+  "scripts": {
+    "deploy": "./deploy.sh",
+    "deploy:force": "FORCE=true ./deploy.sh"
+  },
+  "keywords": [
+    "formfiller",
+    "monorepo",
+    "development"
+  ],
+  "author": "Vivi and Sam <lowcoders@protonmail.com>",
+  "license": "MIT"
+}
