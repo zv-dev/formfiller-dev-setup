@@ -10,6 +10,7 @@ Development-only monorepo configuration for FormFiller packages. This setup uses
   - formfiller-types
   - formfiller-schema
   - formfiller-validator
+  - formfiller-embed
   - formfiller-backend
   - formfiller-frontend
 
@@ -33,7 +34,7 @@ npm install
 
 This will:
 - Install dependencies for all packages
-- Symlink internal packages (formfiller-schema, formfiller-types, formfiller-validator) instead of downloading from GitHub
+- Symlink internal packages (formfiller-types, formfiller-schema, formfiller-validator, formfiller-embed) instead of downloading from GitHub
 - Create a shared `node_modules` in `/var/www/`
 - Automatically clean up any nested formfiller packages (via postinstall script)
 
@@ -57,12 +58,19 @@ npm run dev:backend
 npm run dev:frontend
 ```
 
+### Starting the Embed Dev Server
+
+```bash
+npm run dev:embed
+```
+
 ### Building Individual Packages
 
 ```bash
 npm run build:types      # Build formfiller-types
 npm run build:schema     # Build formfiller-schema
 npm run build:validator  # Build formfiller-validator
+npm run build:embed      # Build formfiller-embed
 npm run build:backend    # Build formfiller-backend
 npm run build:frontend   # Build frontend
 ```
@@ -72,6 +80,7 @@ npm run build:frontend   # Build frontend
 ```bash
 npm run test:schema      # Test formfiller-schema
 npm run test:validator   # Test formfiller-validator
+npm run test:embed       # Test formfiller-embed
 npm run test:backend     # Test formfiller-backend
 npm run test:frontend    # Test frontend
 npm run test:libs        # Test all libraries
@@ -92,6 +101,8 @@ formfiller-types (no internal deps)
 formfiller-schema (depends on types)
        ↓
 formfiller-validator (depends on schema)
+       ↓
+formfiller-embed (depends on schema, validator)
        ↓
 formfiller-backend & formfiller-frontend (depend on all above)
 ```
@@ -129,9 +140,10 @@ npm run build:libs
 | Script | Description |
 |--------|-------------|
 | `npm run install:all` | Install all dependencies |
-| `npm run build:libs` | Build all libraries in correct order |
+| `npm run build:libs` | Build all libraries in correct order (types, schema, validator, embed) |
 | `npm run build:all` | Build everything |
 | `npm run dev:backend` | Start backend dev server |
 | `npm run dev:frontend` | Start frontend dev server |
+| `npm run dev:embed` | Start embed dev server |
 | `npm run test:libs` | Run tests for all libraries |
 | `npm run lint:all` | Lint all packages |
